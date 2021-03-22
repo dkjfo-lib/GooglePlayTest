@@ -6,7 +6,6 @@ using UnityEngine;
 public class UI : MonoBehaviour
 {
     Animator UIAnimator;
-
     public bool inMenu = false;
 
     private void Start()

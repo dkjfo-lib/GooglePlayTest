@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.23529412}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25291204, g: 0.20120755, b: 0.4056604, a: 0.392}
+  m_Color: {r: 0.377693, g: 0.224005, b: 0.631, a: 0.6666667}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae448b9949e7ad94c914ebaabc20ee2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inMenu: 1
+  inMenu: 0
 --- !u!95 &1869284319
 Animator:
   serializedVersion: 3
@@ -549,12 +549,12 @@ PrefabInstance:
     - target: {fileID: 8127970341581749760, guid: 2e463f9d70fe1034cb306e08a35ece8d,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8127970341581749760, guid: 2e463f9d70fe1034cb306e08a35ece8d,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8127970341581749760, guid: 2e463f9d70fe1034cb306e08a35ece8d,
         type: 3}
@@ -709,12 +709,12 @@ PrefabInstance:
     - target: {fileID: 8127970341581749760, guid: 2e463f9d70fe1034cb306e08a35ece8d,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8127970341581749760, guid: 2e463f9d70fe1034cb306e08a35ece8d,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8127970341581749760, guid: 2e463f9d70fe1034cb306e08a35ece8d,
         type: 3}
@@ -869,12 +869,12 @@ PrefabInstance:
     - target: {fileID: 8127970341581749760, guid: 2e463f9d70fe1034cb306e08a35ece8d,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8127970341581749760, guid: 2e463f9d70fe1034cb306e08a35ece8d,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8127970341581749760, guid: 2e463f9d70fe1034cb306e08a35ece8d,
         type: 3}
