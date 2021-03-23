@@ -6,15 +6,17 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    private Camera camera;
+    new private Camera camera;
     [Space]
+    public float cameraRotationSpeed = -.05f;
     public float cameraPlaneSpeed = -.05f;
     public float cameraVerticalSpeed = -.2f;
     [Space]
-    public Vector3 maxPosition = new Vector3(7, 7, 2);
-    public Vector3 minPosition = new Vector3(-2, 3, -7);
+    public Vector3 maxPosition = new Vector3(5, 3, 5);
+    public Vector3 minPosition = new Vector3(-5, -3, -5);
+    public Vector2 rotationRange = new Vector2(15, 75);
 
-    new private void Start()
+    private void Start()
     {
         camera = Camera.main;
         Input.multiTouchEnabled = true;
@@ -31,40 +33,50 @@ public class CameraMovement : MonoBehaviour
     {
         Touch[] Touches = Input.touches;
         Vector3 cameraDirection = Vector3.zero;
-        float directionMultiplier = 1;
+
+        Vector2 cameraRotation = Vector2.zero;
+
         if (Input.touchCount == 2)
         {
             float dotProduct = Vector2.Dot(Touches[0].deltaPosition, Touches[1].deltaPosition);
             if (dotProduct < 0)
             {
-                // zoom
+                // move Y
                 Vector2 deltaPos = Touches[0].position - Touches[1].position;
                 Vector2 deltaVel = Touches[0].deltaPosition - Touches[1].deltaPosition;
                 dotProduct = Math.Sign(Vector2.Dot(deltaPos, deltaVel));
-                directionMultiplier = cameraVerticalSpeed * dotProduct;
-                Vector3 input = Vector3.up;
-                cameraDirection = input;
+                cameraDirection = Vector3.up * cameraVerticalSpeed * dotProduct;
             }
             else
             {
-                // move
-                directionMultiplier = cameraPlaneSpeed;
+                // rotate
                 Vector2 input = (Touches[0].deltaPosition + Touches[1].deltaPosition) / 2f;
-                cameraDirection = new Vector3(input.x - input.y, 0, input.x + input.y) / 2f;
+                cameraRotation = new Vector3(input.x, input.y) * cameraRotationSpeed;
             }
         }
         else if (Input.touchCount == 1)
         {
-            // move
-            directionMultiplier = cameraPlaneSpeed;
+            // move X Z
             Vector2 input = Touches[0].deltaPosition;
-            cameraDirection = new Vector3(input.x - input.y, 0, input.x + input.y) / 2f;
+            cameraDirection =
+                camera.transform.parent.right * input.x +
+                camera.transform.parent.forward * input.y;
+            cameraDirection *= cameraPlaneSpeed;
         }
-        camera.transform.position += cameraDirection * directionMultiplier;
-        camera.transform.position = new Vector3(
-            Mathf.Clamp(camera.transform.position.x, minPosition.x, maxPosition.x),
-            Mathf.Clamp(camera.transform.position.y, minPosition.y, maxPosition.y),
-            Mathf.Clamp(camera.transform.position.z, minPosition.z, maxPosition.z)
+
+        camera.transform.parent.position += cameraDirection;
+        camera.transform.parent.position = new Vector3(
+            Mathf.Clamp(camera.transform.parent.position.x, minPosition.x, maxPosition.x),
+            Mathf.Clamp(camera.transform.parent.position.y, minPosition.y, maxPosition.y),
+            Mathf.Clamp(camera.transform.parent.position.z, minPosition.z, maxPosition.z)
+            );
+
+        camera.transform.parent.Rotate(new Vector3(0, cameraRotation.x, 0));
+        camera.transform.Rotate(new Vector3(cameraRotation.y, 0, 0));
+        camera.transform.rotation = Quaternion.Euler(
+            Mathf.Clamp(camera.transform.rotation.eulerAngles.x, rotationRange.x, rotationRange.y),
+            camera.transform.rotation.eulerAngles.y,
+            camera.transform.rotation.eulerAngles.z
             );
     }
 }
